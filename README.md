@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # dribbble_app_2
 
 A new Flutter project.
@@ -18,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 =======
 # flutter_dribbble_app_2
 this is a second dribbble to flutter app UI example
->>>>>>> 9f3ca0b12ac203dcb2823134f8bea7fce4eb523a
+
