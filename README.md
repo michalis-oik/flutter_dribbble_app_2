@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # dribbble_app_2
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# flutter_dribbble_app_2
+this is a second dribbble to flutter app UI example
+>>>>>>> 9f3ca0b12ac203dcb2823134f8bea7fce4eb523a
