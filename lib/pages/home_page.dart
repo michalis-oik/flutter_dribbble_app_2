@@ -1,3 +1,4 @@
+import 'package:dribbble_app_2/utils/categoryBox.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  int selectedIndex = 0;
+  final List<String> categories = ["All", "Basic", "Frosted", "Cream-filled", "Chocolate", "Other"];
+  int cartItemCount = 2; 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                                   minHeight: 16,
                                 ),
                                 child: Text(
-                                  '2',
+                                  '$cartItemCount',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 10,
@@ -90,14 +96,14 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: const Color.fromARGB(255, 43, 43, 43),
+                              color: const Color.fromARGB(255, 54, 53, 53),
                             ),
                           ),
                         ),
                       ],
                     ), 
 
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 30),
 
                     // Search Bar row
                     Row(
@@ -142,6 +148,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ]
                     ),
+
+                    const SizedBox(height: 30),
+
+                    // Horizontal Layout for categories
+                    SizedBox(
+                      height: 30,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: categories.length,
+                        separatorBuilder: (_, __) => const SizedBox(width: 12),
+                        itemBuilder: (context, index) {
+                          return CategoryBox(
+                            title: categories[index],
+                            selected: selectedIndex == index,
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+
                   ],
                 ),
               ),
