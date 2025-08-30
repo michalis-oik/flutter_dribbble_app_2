@@ -16,24 +16,27 @@ class CategoryBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300), // animation duration
+        curve: Curves.easeInOut, // smooth easing
         height: 40,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
           color: selected ? Colors.pink[300] : Colors.pink[50],
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Colors.pink[200]!,
+            color: selected ? Colors.pink[300]! : Colors.pink[200]!,
             width: 1,
           ),
         ),
         child: Center(
-          child: Text(
-            title,
+          child: AnimatedDefaultTextStyle(
+            duration: Duration(milliseconds: 300),
             style: TextStyle(
               color: selected ? Colors.white : Colors.grey[800],
               fontWeight: FontWeight.bold,
             ),
+            child: Text(title),
           ),
         ),
       ),
