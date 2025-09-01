@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 
 class DonutCard extends StatefulWidget {
   final String title;
+  final String subtitle;
+  final String price;
   final IconData icon;
   final VoidCallback onTap;
 
   const DonutCard({
     super.key,
     required this.title,
+    required this.subtitle,
+    required this.price,
     required this.icon,
     required this.onTap,
   });
@@ -57,6 +61,23 @@ class _DonutCardState extends State<DonutCard> {
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                   color: Colors.black87,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                widget.subtitle,
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                widget.price,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.pink,
                 ),
               ),
             ],

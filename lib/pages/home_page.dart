@@ -162,13 +162,15 @@ class _HomePageState extends State<HomePage> {
                       itemCount: 10,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 40,
-                        mainAxisSpacing: 40,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
                         childAspectRatio: 0.75,
                       ),
                       itemBuilder: (context, index) {
                         return DonutCard(
                           title: "Donut $index",
+                          subtitle: "Description for Donut $index",
+                          price: "\$${(index + 1) * 2.99}",
                           icon: Icons.circle,
                           onTap: () => print("Tapped Donut $index"),
                         );
