@@ -169,8 +169,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return DonutCard(
                           title: "Donut $index",
-                          subtitle: "Description for Donut $index",
-                          price: "\$${(index + 1) * 2.99}",
+                          subtitle: "Delicious ${index % 2 == 0 ? 'chocolate' : 'vanilla'} donut",
+                          price: "\$${((index + 1) * 2.99).toStringAsFixed(2)}",
                           icon: Icons.circle,
                           onTap: () => print("Tapped Donut $index"),
                         );

@@ -23,7 +23,7 @@ class DonutCard extends StatefulWidget {
 
 class _DonutCardState extends State<DonutCard> {
   double _scale = 1.0;
-  bool _isFavorited = false; // Track favorite state
+  bool _isFavorited = false;
 
   void _onTapDown(_) => setState(() => _scale = 1.1);
   void _onTapUp(_) => setState(() => _scale = 1.0);
@@ -84,6 +84,9 @@ class _DonutCardState extends State<DonutCard> {
                         fontSize: 12,
                         color: Colors.grey,
                       ),
+                      maxLines: 2, // Limit to 2 lines
+                      overflow: TextOverflow.ellipsis, // Show ellipsis
+                      textAlign: TextAlign.center, // Center align
                     ),
                     const SizedBox(height: 10),
                     Text(
