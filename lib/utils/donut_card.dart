@@ -21,9 +21,44 @@ class DonutCard extends StatefulWidget {
   State<DonutCard> createState() => _DonutCardState();
 }
 
-class _DonutCardState extends State<DonutCard> {
+class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMixin {
   double _scale = 1.0;
   bool _isFavorited = false;
+  late AnimationController _cartController;
+  late Animation<double> _scaleAnimation;
+  late Animation<Color?> _colorAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _cartController = AnimationController(
+      duration: const Duration(milliseconds: 400),
+      vsync: this,
+    );
+    
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.8).animate(
+      CurvedAnimation(
+        parent: _cartController,
+        curve: Curves.elasticOut,
+      ),
+    );
+    
+    _colorAnimation = ColorTween(
+      begin: Colors.pink[300],
+      end: Colors.green, // Changes to green
+    ).animate(
+      CurvedAnimation(
+        parent: _cartController,
+        curve: const Interval(0.0, 0.7, curve: Curves.easeInOut), // Color changes faster than scale
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _cartController.dispose();
+    super.dispose();
+  }
 
   void _onTapDown(_) => setState(() => _scale = 1.1);
   void _onTapUp(_) => setState(() => _scale = 1.0);
@@ -33,6 +68,13 @@ class _DonutCardState extends State<DonutCard> {
       _isFavorited = !_isFavorited;
     });
     print('Favorite ${_isFavorited ? 'added' : 'removed'} for ${widget.title}');
+  }
+
+  void _animateCart() {
+    _cartController.forward().then((_) {
+      _cartController.reverse();
+    });
+    print('Add to cart button pressed for ${widget.title}');
   }
 
   @override
@@ -84,9 +126,9 @@ class _DonutCardState extends State<DonutCard> {
                         fontSize: 12,
                         color: Colors.grey,
                       ),
-                      maxLines: 2, // Limit to 2 lines
-                      overflow: TextOverflow.ellipsis, // Show ellipsis
-                      textAlign: TextAlign.center, // Center align
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 10),
                     Text(
@@ -117,16 +159,26 @@ class _DonutCardState extends State<DonutCard> {
                 ),
               ),
               
-              // Bottom right button - Add to cart
+              // Bottom right button - Add to cart with bounce and color change
               Positioned(
                 right: 12,
                 bottom: 12,
                 child: GestureDetector(
-                  onTap: () {
-                    print('Add to cart button pressed for ${widget.title}');
-                  },
+                  onTap: _animateCart,
                   behavior: HitTestBehavior.opaque,
-                  child: Icon(Icons.add_shopping_cart, size: 22, color: Colors.pink[300]),
+                  child: AnimatedBuilder(
+                    animation: _cartController,
+                    builder: (context, child) {
+                      return Transform.scale(
+                        scale: _scaleAnimation.value,
+                        child: Icon(
+                          Icons.add_shopping_cart, 
+                          size: 22, 
+                          color: _colorAnimation.value,
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
