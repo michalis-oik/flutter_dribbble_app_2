@@ -158,13 +158,13 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ClipRect( // Clip vertically but allow horizontal overflow
                     child: GridView.builder(
-                      clipBehavior: Clip.none, // Allow horizontal overflow
+                      clipBehavior: Clip.none,
                       itemCount: 10,
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 0.75,
+                        crossAxisSpacing: 15, 
+                        mainAxisSpacing: 15, 
+                        childAspectRatio: 0.8, // Increased from 0.75 to give more vertical space
                       ),
                       itemBuilder: (context, index) {
                         return DonutCard(

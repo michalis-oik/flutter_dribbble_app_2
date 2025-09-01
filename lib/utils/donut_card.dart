@@ -36,7 +36,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
       vsync: this,
     );
     
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.8).animate(
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.5).animate(
       CurvedAnimation(
         parent: _cartController,
         curve: Curves.elasticOut,
@@ -45,11 +45,11 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
     
     _colorAnimation = ColorTween(
       begin: Colors.pink[300],
-      end: Colors.green, // Changes to green
+      end: Colors.green,
     ).animate(
       CurvedAnimation(
         parent: _cartController,
-        curve: const Interval(0.0, 0.7, curve: Curves.easeInOut), // Color changes faster than scale
+        curve: Curves.easeInOut,
       ),
     );
   }
@@ -103,40 +103,64 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
           ),
           child: Stack(
             children: [
-              // Main content
+              // Main content with better spacing
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(12.0), // Reduced padding
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Better space distribution
                   children: [
-                    Icon(widget.icon, size: 50, color: Colors.pink[300]),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.black87,
+                    // Top section with icon
+                    Expanded(
+                      flex: 2,
+                      child: Icon(widget.icon, size: 40, color: Colors.pink[300]), // Smaller icon
+                    ),
+                    
+                    const SizedBox(height: 8),
+                    
+                    // Middle section with text
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14, // Slightly smaller font
+                              color: Colors.black87,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            widget.subtitle,
+                            style: const TextStyle(
+                              fontSize: 10, // Smaller font
+                              color: Colors.grey,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    Text(
-                      widget.subtitle,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      widget.price,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.pink,
+                    
+                    const SizedBox(height: 8),
+                    
+                    // Bottom section with price
+                    Expanded(
+                      flex: 1,
+                      child: Text(
+                        widget.price,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.pink,
+                        ),
                       ),
                     ),
                   ],
@@ -145,24 +169,24 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
               
               // Bottom left button - Favorite with toggle
               Positioned(
-                left: 12,
-                bottom: 12,
+                left: 8,
+                bottom: 8,
                 child: GestureDetector(
                   onTap: _toggleFavorite,
                   behavior: HitTestBehavior.opaque,
                   child: AnimatedCrossFade(
                     duration: const Duration(milliseconds: 200),
                     crossFadeState: _isFavorited ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                    firstChild: Icon(Icons.favorite_border, size: 22, color: Colors.grey[600]),
-                    secondChild: Icon(Icons.favorite, size: 22, color: Colors.pink[300]),
+                    firstChild: Icon(Icons.favorite_border, size: 20, color: Colors.grey[600]), // Smaller icon
+                    secondChild: Icon(Icons.favorite, size: 20, color: Colors.pink[300]), // Smaller icon
                   ),
                 ),
               ),
               
               // Bottom right button - Add to cart with bounce and color change
               Positioned(
-                right: 12,
-                bottom: 12,
+                right: 8,
+                bottom: 8,
                 child: GestureDetector(
                   onTap: _animateCart,
                   behavior: HitTestBehavior.opaque,
@@ -173,7 +197,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                         scale: _scaleAnimation.value,
                         child: Icon(
                           Icons.add_shopping_cart, 
-                          size: 22, 
+                          size: 20, // Smaller icon
                           color: _colorAnimation.value,
                         ),
                       );
