@@ -103,58 +103,41 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
           ),
           child: Stack(
             children: [
-              // Main content with better spacing
-              Padding(
-                padding: const EdgeInsets.all(12.0), // Reduced padding
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Better space distribution
-                  children: [
-                    // Top section with icon
-                    Expanded(
-                      flex: 2,
-                      child: Icon(widget.icon, size: 40, color: Colors.pink[300]), // Smaller icon
-                    ),
-                    
-                    const SizedBox(height: 8),
-                    
-                    // Middle section with text
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.title,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14, // Slightly smaller font
-                              color: Colors.black87,
-                            ),
-                            textAlign: TextAlign.center,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            widget.subtitle,
-                            style: const TextStyle(
-                              fontSize: 10, // Smaller font
-                              color: Colors.grey,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+              // Main content centered
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min, // shrink to fit content
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(widget.icon, size: 40, color: Colors.pink[300]),
+                      const SizedBox(height: 8),
+                      Text(
+                        widget.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.black87,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    
-                    const SizedBox(height: 8),
-                    
-                    // Bottom section with price
-                    Expanded(
-                      flex: 1,
-                      child: Text(
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.subtitle,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
                         widget.price,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -162,31 +145,33 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                           color: Colors.pink,
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              
-              // Bottom left button - Favorite with toggle
+
+              // Bottom left - Favorite
               Positioned(
-                left: 8,
-                bottom: 8,
+                left: 15,
+                bottom: 15,
                 child: GestureDetector(
                   onTap: _toggleFavorite,
                   behavior: HitTestBehavior.opaque,
                   child: AnimatedCrossFade(
                     duration: const Duration(milliseconds: 200),
-                    crossFadeState: _isFavorited ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                    firstChild: Icon(Icons.favorite_border, size: 20, color: Colors.grey[600]), // Smaller icon
-                    secondChild: Icon(Icons.favorite, size: 20, color: Colors.pink[300]), // Smaller icon
+                    crossFadeState: _isFavorited
+                        ? CrossFadeState.showSecond
+                        : CrossFadeState.showFirst,
+                    firstChild: Icon(Icons.favorite_border, size: 20, color: Colors.grey[600]),
+                    secondChild: Icon(Icons.favorite, size: 20, color: Colors.pink[300]),
                   ),
                 ),
               ),
-              
-              // Bottom right button - Add to cart with bounce and color change
+
+              // Bottom right - Add to cart
               Positioned(
-                right: 8,
-                bottom: 8,
+                right: 15,
+                bottom: 15,
                 child: GestureDetector(
                   onTap: _animateCart,
                   behavior: HitTestBehavior.opaque,
@@ -196,8 +181,8 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                       return Transform.scale(
                         scale: _scaleAnimation.value,
                         child: Icon(
-                          Icons.add_shopping_cart, 
-                          size: 20, // Smaller icon
+                          Icons.add_shopping_cart,
+                          size: 20,
                           color: _colorAnimation.value,
                         ),
                       );
