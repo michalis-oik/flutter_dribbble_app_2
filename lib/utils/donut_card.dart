@@ -95,7 +95,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
         child: Container(
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.purple[100],
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
@@ -136,9 +136,9 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                       const SizedBox(height: 4),
                       Text(
                         widget.subtitle,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 10,
-                          color: Colors.grey,
+                          color: Colors.grey[800],
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
