@@ -24,6 +24,19 @@ class _HomePageState extends State<HomePage> {
   int cartItemCount = 0;
   List<bool> isFavoritedList = List.generate(10, (index) => false);
 
+  final List<String> donutImages = [
+    "lib/assets/images/donut1.png",
+    "lib/assets/images/donut2.png",
+    "lib/assets/images/donut3.png",
+    "lib/assets/images/donut4.png",
+    "lib/assets/images/donut5.png",
+    "lib/assets/images/donut6.png",
+    "lib/assets/images/donut7.png",
+    "lib/assets/images/donut8.png",
+    "lib/assets/images/donut9.png",
+    "lib/assets/images/donut10.png",
+  ];
+
   void _addToCart() {
     setState(() {
       cartItemCount++;
@@ -168,7 +181,7 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: ClipRect( // Clip vertically but allow horizontal overflow
+                  child: ClipRect(
                     child: GridView.builder(
                       clipBehavior: Clip.none,
                       itemCount: 10,
@@ -176,20 +189,20 @@ class _HomePageState extends State<HomePage> {
                         crossAxisCount: 2,
                         crossAxisSpacing: 15, 
                         mainAxisSpacing: 15, 
-                        childAspectRatio: 0.8, // Increased from 0.75 to give more vertical space
+                        childAspectRatio: 0.8,
                       ),
                       itemBuilder: (context, index) {
                         return DonutCard(
                           title: "Donut $index",
                           subtitle: "Delicious ${index % 2 == 0 ? 'chocolate' : 'vanilla'} donut",
                           price: "\$${((index + 1) * 2.99).toStringAsFixed(2)}",
-                          icon: Icons.circle,
+                          imagePath: donutImages[index % donutImages.length], // This will cycle through your images
                           isFavorited: isFavoritedList[index],
                           onFavoritePressed: () => setState(() {
                             isFavoritedList[index] = !isFavoritedList[index];
                           }),
                           onTap: () => print("Tapped Donut $index"),
-                          onAddToCartPressed: _addToCart, 
+                          onAddToCartPressed: _addToCart,
                         );
                       },
                     ),

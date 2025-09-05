@@ -6,7 +6,7 @@ class DonutCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final String price;
-  final IconData icon;
+  final String imagePath;
   final bool isFavorited;
   final VoidCallback onFavoritePressed;
   final VoidCallback onTap;
@@ -17,7 +17,7 @@ class DonutCard extends StatefulWidget {
     required this.title,
     required this.subtitle,
     required this.price,
-    required this.icon,
+    required this.imagePath,
     required this.isFavorited,
     required this.onFavoritePressed,
     required this.onTap,
@@ -70,16 +70,14 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
   void _onTapUp(_) => setState(() => _scale = 1.0);
 
   void _toggleFavorite() {
-    widget.onFavoritePressed(); // Call parent's callback
+    widget.onFavoritePressed();
   }
 
   void _animateCart() {
     _cartController.forward().then((_) {
       _cartController.reverse();
     });
-    
     widget.onAddToCartPressed();
-
     print('Add to cart button pressed for ${widget.title}');
   }
 
@@ -114,11 +112,15 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min, // shrink to fit content
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(widget.icon, size: 40, color: Colors.pink[300]),
+                      Image.asset(
+                        widget.imagePath,
+                        height: 60,
+                        width: 60,
+                      ),
                       const SizedBox(height: 8),
                       Text(
                         widget.title,
