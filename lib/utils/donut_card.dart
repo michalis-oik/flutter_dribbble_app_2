@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
 
 class DonutCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final String price;
   final IconData icon;
+  final bool isFavorited;
+  final VoidCallback onFavoritePressed;
   final VoidCallback onTap;
 
   const DonutCard({
@@ -14,6 +15,8 @@ class DonutCard extends StatefulWidget {
     required this.subtitle,
     required this.price,
     required this.icon,
+    required this.isFavorited,
+    required this.onFavoritePressed,
     required this.onTap,
   });
 
@@ -23,7 +26,6 @@ class DonutCard extends StatefulWidget {
 
 class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMixin {
   double _scale = 1.0;
-  bool _isFavorited = false;
   late AnimationController _cartController;
   late Animation<double> _scaleAnimation;
   late Animation<Color?> _colorAnimation;
@@ -64,10 +66,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
   void _onTapUp(_) => setState(() => _scale = 1.0);
 
   void _toggleFavorite() {
-    setState(() {
-      _isFavorited = !_isFavorited;
-    });
-    print('Favorite ${_isFavorited ? 'added' : 'removed'} for ${widget.title}');
+    widget.onFavoritePressed(); // Call parent's callback
   }
 
   void _animateCart() {
@@ -159,7 +158,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                   behavior: HitTestBehavior.opaque,
                   child: AnimatedCrossFade(
                     duration: const Duration(milliseconds: 200),
-                    crossFadeState: _isFavorited
+                    crossFadeState: widget.isFavorited
                         ? CrossFadeState.showSecond
                         : CrossFadeState.showFirst,
                     firstChild: Icon(Icons.favorite_border, size: 20, color: Colors.grey[600]),

@@ -20,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     "Other"
   ];
   int cartItemCount = 2;
+  List<bool> isFavoritedList = List.generate(10, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -172,6 +173,10 @@ class _HomePageState extends State<HomePage> {
                           subtitle: "Delicious ${index % 2 == 0 ? 'chocolate' : 'vanilla'} donut",
                           price: "\$${((index + 1) * 2.99).toStringAsFixed(2)}",
                           icon: Icons.circle,
+                          isFavorited: isFavoritedList[index], // Pass state
+                          onFavoritePressed: () => setState(() {
+                            isFavoritedList[index] = !isFavoritedList[index];
+                          }),
                           onTap: () => print("Tapped Donut $index"),
                         );
                       },
