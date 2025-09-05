@@ -119,7 +119,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                       Image.asset(
                         widget.imagePath,
                         height: 60,
-                        width: 60,
+                        width: 80,
                       ),
                       const SizedBox(height: 8),
                       Text(
