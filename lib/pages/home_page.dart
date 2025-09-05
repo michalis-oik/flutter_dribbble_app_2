@@ -1,3 +1,5 @@
+// lib/home_page.dart
+
 import 'package:dribbble_app_2/utils/categoryBox.dart';
 import 'package:dribbble_app_2/utils/donut_card.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +21,14 @@ class _HomePageState extends State<HomePage> {
     "Chocolate",
     "Other"
   ];
-  int cartItemCount = 2;
+  int cartItemCount = 0;
   List<bool> isFavoritedList = List.generate(10, (index) => false);
+
+  void _addToCart() {
+    setState(() {
+      cartItemCount++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +58,21 @@ class _HomePageState extends State<HomePage> {
                         Icon(Icons.menu_rounded, color: Colors.grey[800], size: 30),
                         const Spacer(),
                         Stack(
+                          clipBehavior: Clip.none,
                           children: [
                             Icon(Icons.shopping_bag_outlined, color: Colors.grey[800], size: 30),
                             if (cartItemCount > 0)
                               Positioned(
-                                right: 0,
-                                bottom: 0,
+                                right: -4,
+                                top: -4,
                                 child: Container(
+                                  padding: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
                                     color: Colors.pink[300],
                                     shape: BoxShape.circle,
+                                    border: Border.all(color: Colors.white, width: 1.5)
                                   ),
-                                  constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                  constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
                                   child: Text(
                                     '$cartItemCount',
                                     style: const TextStyle(
@@ -173,11 +184,12 @@ class _HomePageState extends State<HomePage> {
                           subtitle: "Delicious ${index % 2 == 0 ? 'chocolate' : 'vanilla'} donut",
                           price: "\$${((index + 1) * 2.99).toStringAsFixed(2)}",
                           icon: Icons.circle,
-                          isFavorited: isFavoritedList[index], // Pass state
+                          isFavorited: isFavoritedList[index],
                           onFavoritePressed: () => setState(() {
                             isFavoritedList[index] = !isFavoritedList[index];
                           }),
                           onTap: () => print("Tapped Donut $index"),
+                          onAddToCartPressed: _addToCart, 
                         );
                       },
                     ),

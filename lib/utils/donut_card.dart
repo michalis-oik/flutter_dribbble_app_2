@@ -1,3 +1,5 @@
+// lib/utils/donut_card.dart
+
 import 'package:flutter/material.dart';
 
 class DonutCard extends StatefulWidget {
@@ -8,6 +10,7 @@ class DonutCard extends StatefulWidget {
   final bool isFavorited;
   final VoidCallback onFavoritePressed;
   final VoidCallback onTap;
+  final VoidCallback onAddToCartPressed;
 
   const DonutCard({
     super.key,
@@ -18,6 +21,7 @@ class DonutCard extends StatefulWidget {
     required this.isFavorited,
     required this.onFavoritePressed,
     required this.onTap,
+    required this.onAddToCartPressed,
   });
 
   @override
@@ -73,6 +77,9 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
     _cartController.forward().then((_) {
       _cartController.reverse();
     });
+    
+    widget.onAddToCartPressed();
+
     print('Add to cart button pressed for ${widget.title}');
   }
 
