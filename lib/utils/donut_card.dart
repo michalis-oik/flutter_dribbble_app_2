@@ -1,5 +1,3 @@
-// lib/utils/donut_card.dart
-
 import 'package:flutter/material.dart';
 
 class DonutCard extends StatefulWidget {
@@ -107,13 +105,11 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
           ),
           child: Stack(
             children: [
-              // Main content centered
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
@@ -121,7 +117,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                         height: 60,
                         width: 80,
                       ),
-                      const SizedBox(height: 8),
                       Text(
                         widget.title,
                         style: const TextStyle(
@@ -133,7 +128,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const SizedBox(height: 4),
                       Text(
                         widget.subtitle,
                         style: TextStyle(
@@ -144,7 +138,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 10),
                       Text(
                         widget.price,
                         style: const TextStyle(

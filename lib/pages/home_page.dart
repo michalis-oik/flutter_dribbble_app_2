@@ -133,13 +133,13 @@ class _HomePageState extends State<HomePage> {
                         child: const Text("We Offer Happiness In Circles", textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 54, 53, 53),),),
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
                     Row(
                       children: [
                         Expanded(
                           child: Container(
                             height: 45,
-                            decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10),),
+                            decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.circular(10),),
                             child: Row(
                               children: const [
                                 SizedBox(width: 10),
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 20),
 
                     // Horizontal Categories
                     SizedBox(
@@ -196,9 +196,9 @@ class _HomePageState extends State<HomePage> {
                       itemCount: _filteredDonuts.length, // Use the length of the filtered list
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 15, 
-                        mainAxisSpacing: 15, 
-                        childAspectRatio: 0.8,
+                        crossAxisSpacing: 10, 
+                        mainAxisSpacing: 10, 
+                        childAspectRatio: 0.75,
                       ),
                       itemBuilder: (context, index) {
                         // Get the specific donut from the filtered list
