@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               // Top Section
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
                 child: Column(
                   children: [
                     Row(
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10, 
-                        mainAxisSpacing: 10, 
+                        mainAxisSpacing: 5, 
                         childAspectRatio: 0.75,
                       ),
                       itemBuilder: (context, index) {
