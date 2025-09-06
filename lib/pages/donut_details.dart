@@ -19,11 +19,9 @@ class DonutDetails extends StatelessWidget {
         ),
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Top Section
+            children: [ 
               Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                 child: Column(
                   children: [
                     Row(
@@ -33,40 +31,35 @@ class DonutDetails extends StatelessWidget {
                         Icon(Icons.favorite_border, color: Colors.grey[800], size: 30),
                       ],
                     ),
-                    SizedBox(height: 20),
-
-                    //show donut image big
+                    //const SizedBox(height: 20),
                     Center(
-                      child: Image.asset('lib/assets/images/donut2.png', width: 300, height: 300),
+                      child: Image.asset('lib/assets/images/donut2.png', width: 250, height: 200),
                     ),
-                    //SizedBox(height: 10),
-
-                    //review row
+                    //const SizedBox(height: 10),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center, 
-                      spacing: 10,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           '4.5',
                           style: TextStyle(
                             color: Colors.grey[800],
                             fontSize: 28,
-                            fontWeight: FontWeight.bold
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(Icons.star, color: Colors.amber), 
+                        const SizedBox(width: 8),
+                        const Icon(Icons.star, color: Colors.amber),
+                        const SizedBox(width: 8),
                         Text(
                           '(50 reviews)',
                           style: TextStyle(
                             color: Colors.grey[800],
                             fontSize: 14,
-                          ), 
+                          ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-
-                    //donut type
+                    const SizedBox(height: 20),
                     Center(
                       child: Text(
                         'Cream-Filled',
@@ -77,9 +70,6 @@ class DonutDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-
-                    
-                    //donut name
                     Center(
                       child: Text(
                         'Vanilla-Sprinkle',
@@ -89,23 +79,21 @@ class DonutDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                    //horizontal layout for the calory box
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 13,
-                      children: [
-                        Caloriesbox(title: 'Calories', value: '300'),
-                        Caloriesbox(title: 'Fat', value: '25%'),
-                        Caloriesbox(title: 'Salt', value: '3%'),
-                        Caloriesbox(title: 'Sugars', value: '16g'),
+                      children: const [
+                        Expanded(child: Caloriesbox(title: 'Calories', value: '300')),
+                        SizedBox(width: 10), // Explicit spacing
+                        Expanded(child: Caloriesbox(title: 'Fat', value: '25%')),
+                        SizedBox(width: 10), // Explicit spacing
+                        Expanded(child: Caloriesbox(title: 'Salt', value: '3%')),
+                        SizedBox(width: 10), // Explicit spacing
+                        Expanded(child: Caloriesbox(title: 'Sugars', value: '16g')),
                       ],
                     ),
-
-
                   ],
-                ),   
+                ),
               ),
             ],
           ),

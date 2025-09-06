@@ -1,11 +1,11 @@
+// lib/utils/CaloriesBox.dart
+
 import 'package:flutter/material.dart';
 
 class Caloriesbox extends StatelessWidget {
-  // 1. Add final fields to hold the data
   final String title;
   final String value;
 
-  // 2. Update the constructor to accept the parameters
   const Caloriesbox({
     super.key,
     required this.title,
@@ -14,9 +14,10 @@ class Caloriesbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // REMOVED the fixed width from this Container
     return Container(
-      height: 130,
-      width: 80,
+      height: 130, 
+      // width: 90, // <--- REMOVED THIS LINE
       decoration: BoxDecoration(
         color: Colors.purple[100],
         borderRadius: BorderRadius.circular(30),
@@ -35,26 +36,25 @@ class Caloriesbox extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
-                // 3. Use the 'title' parameter here
                 title,
                 style: TextStyle(
                   color: Colors.grey[800],
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
                 ),
+                textAlign: TextAlign.center, // Good practice for wrapped text
               ),
             ),
             const Spacer(),
             Container(
               height: 50,
-              width: 90,
+              // width: 90, // <--- ALSO REMOVED THIS LINE
               decoration: BoxDecoration(
                 color: Colors.purple[200],
                 borderRadius: BorderRadius.circular(30),
               ),
               child: Center(
                 child: Text(
-                  // 3. Use the 'value' parameter here
                   value,
                   style: TextStyle(
                     color: Colors.grey[800],
