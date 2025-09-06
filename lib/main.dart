@@ -1,3 +1,4 @@
+import 'package:dribbble_app_2/pages/donut_details.dart';
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage());
+      home: DonutDetails());
   }
 }
 
