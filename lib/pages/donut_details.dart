@@ -1,3 +1,4 @@
+import 'package:dribbble_app_2/utils/CaloriesBox.dart';
 import 'package:flutter/material.dart';
 
 class DonutDetails extends StatelessWidget {
@@ -88,10 +89,19 @@ class DonutDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
 
-                    //horizontal layout
-                    
+                    //horizontal layout for the calory box
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: 13,
+                      children: [
+                        Caloriesbox(title: 'Calories', value: '300'),
+                        Caloriesbox(title: 'Fat', value: '25%'),
+                        Caloriesbox(title: 'Salt', value: '3%'),
+                        Caloriesbox(title: 'Sugars', value: '16g'),
+                      ],
+                    ),
 
 
                   ],
