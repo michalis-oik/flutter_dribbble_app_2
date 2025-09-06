@@ -25,14 +25,14 @@ class _HomePageState extends State<HomePage> {
   // Master List of all Donuts
   final List<Donut> _allDonuts = [
     Donut(title: "Glazed Ring", subtitle: "Classic, sweet, and simple.", price: "\$1.99", imagePath: "lib/assets/images/donut1.png", category: "Basic"),
-    Donut(title: "Strawberry Frost", subtitle: "A fruity delight with sprinkles.", price: "\$2.49", imagePath: "lib/assets/images/donut2.png", category: "Frosted"),
+    Donut(title: "Strawberry Frost", subtitle: "A fruity delight with sprinkles.", price: "\$2.49", imagePath: "lib/assets/images/donut9.png", category: "Frosted"),
     Donut(title: "Boston Kreme", subtitle: "Bavarian cream filling.", price: "\$2.99", imagePath: "lib/assets/images/donut3.png", category: "Cream-filled"),
     Donut(title: "Chocolate Glaze", subtitle: "For the chocolate lovers.", price: "\$2.49", imagePath: "lib/assets/images/donut4.png", category: "Chocolate"),
     Donut(title: "Cinnamon Twist", subtitle: "A warm, spiced treat.", price: "\$2.29", imagePath: "lib/assets/images/donut5.png", category: "Other"),
     Donut(title: "Blueberry Cake", subtitle: "A dense, flavorful cake donut.", price: "\$2.99", imagePath: "lib/assets/images/donut6.png", category: "Basic"),
     Donut(title: "Vanilla Sprinkle", subtitle: "Perfect for a celebration.", price: "\$2.49", imagePath: "lib/assets/images/donut7.png", category: "Frosted"),
     Donut(title: "Jelly Filled", subtitle: "Classic raspberry jelly.", price: "\$2.99", imagePath: "lib/assets/images/donut8.png", category: "Cream-filled"),
-    Donut(title: "Double Chocolate", subtitle: "Chocolate on chocolate.", price: "\$2.99", imagePath: "lib/assets/images/donut9.png", category: "Chocolate"),
+    Donut(title: "Double Chocolate", subtitle: "Chocolate on chocolate.", price: "\$2.99", imagePath: "lib/assets/images/donut2.png", category: "Chocolate"),
     Donut(title: "Maple Bar", subtitle: "A long john with maple icing.", price: "\$2.79", imagePath: "lib/assets/images/donut10.png", category: "Other"),
   ];
 
