@@ -1,7 +1,12 @@
+import 'package:dribbble_app_2/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'package:flutter/services.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  
   runApp(const MyApp());
 }
 
@@ -11,8 +16,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Donut App',
       debugShowCheckedModeBanner: false,
-      home: HomePage());
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        iconTheme: IconThemeData(
+          color: Colors.grey[800],
+          size: 30,
+        ),
+      ),
+      home: const HomePage(),
+    );
   }
 }
-
