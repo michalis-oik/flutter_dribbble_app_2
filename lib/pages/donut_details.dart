@@ -52,7 +52,7 @@ class _DonutDetailsState extends State<DonutDetails> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                padding: const EdgeInsets.only(left: 25, right: 25, top: 10, bottom: 0),
                 child: Row(
                   children: [
                     GestureDetector(

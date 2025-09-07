@@ -125,7 +125,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
             children: [
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 25),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
