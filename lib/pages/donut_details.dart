@@ -1,4 +1,5 @@
 import 'package:dribbble_app_2/utils/CaloriesBox.dart';
+import 'package:dribbble_app_2/utils/dropdownBox.dart';
 import 'package:flutter/material.dart';
 
 class DonutDetails extends StatelessWidget {
@@ -92,6 +93,17 @@ class DonutDetails extends StatelessWidget {
                         Expanded(child: Caloriesbox(title: 'Sugars', value: '16g')),
                       ],
                     ),
+
+                    const SizedBox(height: 20),
+                    
+                    // Ingredients box
+                    Dropdownbox(title: 'Ingredients'),
+
+                    const SizedBox(height: 20),
+
+                    // Reviews box
+                    Dropdownbox(title: 'Reviews(50 reviews)')
+
                   ],
                 ),
               ),

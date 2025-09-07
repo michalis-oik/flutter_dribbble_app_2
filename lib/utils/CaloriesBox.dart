@@ -14,10 +14,9 @@ class Caloriesbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // REMOVED the fixed width from this Container
     return Container(
       height: 130, 
-      // width: 90, // <--- REMOVED THIS LINE
+      // width: 90, 
       decoration: BoxDecoration(
         color: Colors.purple[100],
         borderRadius: BorderRadius.circular(30),
@@ -48,7 +47,7 @@ class Caloriesbox extends StatelessWidget {
             const Spacer(),
             Container(
               height: 50,
-              // width: 90, // <--- ALSO REMOVED THIS LINE
+              // width: 90, 
               decoration: BoxDecoration(
                 color: Colors.purple[200],
                 borderRadius: BorderRadius.circular(30),
