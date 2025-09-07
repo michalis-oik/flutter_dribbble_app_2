@@ -1,9 +1,17 @@
+import 'package:dribbble_app_2/models/donut_model.dart'; // 1. Import the Donut model
 import 'package:dribbble_app_2/utils/CaloriesBox.dart';
 import 'package:dribbble_app_2/utils/dropdownBox.dart';
 import 'package:flutter/material.dart';
 
 class DonutDetails extends StatelessWidget {
-  const DonutDetails({super.key});
+  // 2. Add a final property to hold the donut data
+  final Donut donut;
+
+  // 3. Update the constructor to require a Donut object
+  const DonutDetails({
+    super.key,
+    required this.donut,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +27,17 @@ class DonutDetails extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          // This is the main layout Column that holds the three sections
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Row(
                   children: [
-                    Icon(Icons.arrow_back, color: Colors.grey[800], size: 30),
+                    // 4. Make the back button functional
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.arrow_back, color: Colors.grey[800], size: 30),
+                    ),
                     const Spacer(),
                     Icon(Icons.favorite_border, color: Colors.grey[800], size: 30),
                   ],
@@ -35,13 +46,12 @@ class DonutDetails extends StatelessWidget {
 
               Expanded(
                 child: SingleChildScrollView(
-                  // We only need horizontal padding here now
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                     children: [
-                      // The content now starts with the image
+                      // 5. Use the donut data to display the correct image
                       Center(
-                        child: Image.asset('lib/assets/images/donut2.png', width: 230, height: 180),
+                        child: Image.asset(donut.imagePath, width: 230, height: 180),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,12 +63,14 @@ class DonutDetails extends StatelessWidget {
                           Text('(50 reviews)', style: TextStyle(color: Colors.grey[800], fontSize: 14)),
                         ],
                       ),
-                      const SizedBox(height: 10), // A little extra space
+                      const SizedBox(height: 10),
+                      // 5. Use donut data for the category
                       Center(
-                        child: Text('Cream-Filled', style: TextStyle(color: Colors.grey[800], fontSize: 28, fontWeight: FontWeight.bold)),
+                        child: Text(donut.category, style: TextStyle(color: Colors.grey[800], fontSize: 28, fontWeight: FontWeight.bold)),
                       ),
+                      // 5. Use donut data for the title
                       Center(
-                        child: Text('Vanilla-Sprinkle', style: TextStyle(color: Colors.grey[800], fontSize: 20)),
+                        child: Text(donut.title, style: TextStyle(color: Colors.grey[800], fontSize: 20)),
                       ),
                       const SizedBox(height: 20),
                       Row(
@@ -76,18 +88,18 @@ class DonutDetails extends StatelessWidget {
                       Dropdownbox(title: 'Ingredients'),
                       const SizedBox(height: 20),
                       Dropdownbox(title: 'Reviews(50)'),
-                       const SizedBox(height: 20), // Padding at the end of the scroll
+                       const SizedBox(height: 20),
                     ],
                   ),
                 ),
               ),
 
               Padding(
-                //top 10 bottom 15
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Row(
                   children: [
-                    Text('\$3.99', style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
+                    // 5. Use donut data for the price
+                    Text(donut.price, style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {},

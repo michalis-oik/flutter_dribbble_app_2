@@ -1,4 +1,5 @@
-import 'package:dribbble_app_2/models/donut_model.dart'; 
+import 'package:dribbble_app_2/models/donut_model.dart';
+import 'package:dribbble_app_2/pages/donut_details.dart';
 import 'package:dribbble_app_2/utils/categoryBox.dart';
 import 'package:dribbble_app_2/utils/donut_card.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
-  final List<String> categories = [
-    "All",
-    "Basic",
-    "Frosted",
-    "Cream-filled",
-    "Chocolate",
-    "Other"
-  ];
+  final List<String> categories = ["All", "Basic", "Frosted", "Cream-filled", "Chocolate", "Other"];
   int cartItemCount = 0;
 
-  // Master List of all Donuts
   final List<Donut> _allDonuts = [
     Donut(title: "Glazed Ring", subtitle: "Classic, sweet, and simple.", price: "\$1.99", imagePath: "lib/assets/images/donut1.png", category: "Basic"),
     Donut(title: "Strawberry Frost", subtitle: "A fruity delight with sprinkles.", price: "\$2.49", imagePath: "lib/assets/images/donut9.png", category: "Frosted"),
@@ -36,32 +29,24 @@ class _HomePageState extends State<HomePage> {
     Donut(title: "Maple Bar", subtitle: "A long john with maple icing.", price: "\$2.79", imagePath: "lib/assets/images/donut10.png", category: "Other"),
   ];
 
-  // A list to hold all the displayed donuts
   List<Donut> _filteredDonuts = [];
 
   @override
   void initState() {
     super.initState();
-    // Initially, show all donuts
     _filteredDonuts = _allDonuts;
   }
 
-  // Filter Donuts
   void _filterDonuts() {
     setState(() {
-      // Get the string of the selected category
       final selectedCategory = categories[selectedIndex];
-
       if (selectedCategory == "All") {
         _filteredDonuts = _allDonuts;
       } else {
-        _filteredDonuts = _allDonuts
-            .where((donut) => donut.category == selectedCategory)
-            .toList();
+        _filteredDonuts = _allDonuts.where((donut) => donut.category == selectedCategory).toList();
       }
     });
   }
-
 
   void _addToCart() {
     setState(() {
@@ -86,7 +71,6 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Top Section
               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25, top: 25, bottom: 15),
                 child: Column(
@@ -105,21 +89,9 @@ class _HomePageState extends State<HomePage> {
                                 top: -4,
                                 child: Container(
                                   padding: const EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                      color: Colors.pink[300],
-                                      shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.white, width: 1.5)
-                                  ),
+                                  decoration: BoxDecoration(color: Colors.pink[300], shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 1.5)),
                                   constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-                                  child: Text(
-                                    '$cartItemCount',
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
+                                  child: Text('$cartItemCount', style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                                 ),
                               ),
                           ],
@@ -127,11 +99,8 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Center(
-                      child: SizedBox(
-                        width: 250,
-                        child: const Text("We Offer Happiness In Circles", textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 54, 53, 53),),),
-                      ),
+                    const Center(
+                      child: SizedBox(width: 250, child: Text("We Offer Happiness In Circles", textAlign: TextAlign.center, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 54, 53, 53)))),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -139,29 +108,15 @@ class _HomePageState extends State<HomePage> {
                         Expanded(
                           child: Container(
                             height: 45,
-                            decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.circular(10),),
-                            child: Row(
-                              children: const [
-                                SizedBox(width: 10),
-                                Icon(Icons.search, color: Colors.grey),
-                                SizedBox(width: 10),
-                                Text("Search for donut", style: TextStyle(color: Colors.grey)),
-                              ],
-                            ),
+                            decoration: BoxDecoration(color: Colors.pink[50], borderRadius: BorderRadius.circular(10)),
+                            child: Row(children: const [SizedBox(width: 10), Icon(Icons.search, color: Colors.grey), SizedBox(width: 10), Text("Search for donut", style: TextStyle(color: Colors.grey))]),
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Container(
-                          width: 45,
-                          height: 45,
-                          decoration: BoxDecoration(color: Colors.pink[300], borderRadius: BorderRadius.circular(10),),
-                          child: const Icon(Icons.filter_list, color: Colors.white),
-                        ),
+                        Container(width: 45, height: 45, decoration: BoxDecoration(color: Colors.pink[300], borderRadius: BorderRadius.circular(10)), child: const Icon(Icons.filter_list, color: Colors.white)),
                       ],
                     ),
                     const SizedBox(height: 20),
-
-                    // Horizontal Categories
                     SizedBox(
                       height: 30,
                       child: ListView.separated(
@@ -175,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               setState(() {
                                 selectedIndex = index;
-                                _filterDonuts(); // Filter the list when a category is tapped
+                                _filterDonuts();
                               });
                             },
                           );
@@ -185,27 +140,17 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-
-              // Donut Grid (scrollable)
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: ClipRect(
                     child: GridView.builder(
                       clipBehavior: Clip.none,
-                      itemCount: _filteredDonuts.length, // Use the length of the filtered list
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10, 
-                        mainAxisSpacing: 5, 
-                        childAspectRatio: 0.75,
-                      ),
+                      itemCount: _filteredDonuts.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 5, childAspectRatio: 0.75),
                       itemBuilder: (context, index) {
-                        // Get the specific donut from the filtered list
                         final donut = _filteredDonuts[index];
-
                         return DonutCard(
-                          // Pass properties from the donut model object
                           title: donut.title,
                           subtitle: donut.subtitle,
                           price: donut.price,
@@ -213,11 +158,19 @@ class _HomePageState extends State<HomePage> {
                           isFavorited: donut.isFavorited,
                           onFavoritePressed: () {
                             setState(() {
-                              // Toggle the favorite status on the model itself
                               donut.isFavorited = !donut.isFavorited;
                             });
                           },
-                          onTap: () => print("Tapped ${donut.title}"),
+                          // --- 3. THIS IS THE NAVIGATION LOGIC ---
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                // Pass the tapped donut object to the details page
+                                builder: (context) => DonutDetails(donut: donut),
+                              ),
+                            );
+                          },
                           onAddToCartPressed: _addToCart,
                         );
                       },
