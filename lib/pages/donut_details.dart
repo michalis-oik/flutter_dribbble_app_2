@@ -1,17 +1,37 @@
-import 'package:dribbble_app_2/models/donut_model.dart'; // 1. Import the Donut model
+import 'package:dribbble_app_2/models/donut_model.dart';
 import 'package:dribbble_app_2/utils/CaloriesBox.dart';
 import 'package:dribbble_app_2/utils/dropdownBox.dart';
 import 'package:flutter/material.dart';
 
-class DonutDetails extends StatelessWidget {
-  // 2. Add a final property to hold the donut data
+class DonutDetails extends StatefulWidget {
   final Donut donut;
+  final VoidCallback onFavoriteChanged;
 
-  // 3. Update the constructor to require a Donut object
   const DonutDetails({
     super.key,
     required this.donut,
+    required this.onFavoriteChanged,
   });
+
+  @override
+  State<DonutDetails> createState() => _DonutDetailsState();
+}
+
+class _DonutDetailsState extends State<DonutDetails> {
+  late bool _isFavorited;
+
+  @override
+  void initState() {
+    super.initState();
+    _isFavorited = widget.donut.isFavorited;
+  }
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorited = !_isFavorited;
+    });
+    widget.onFavoriteChanged();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +53,32 @@ class DonutDetails extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Row(
                   children: [
-                    // 4. Make the back button functional
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.arrow_back, color: Colors.grey[800], size: 30),
                     ),
                     const Spacer(),
-                    Icon(Icons.favorite_border, color: Colors.grey[800], size: 30),
+                    GestureDetector(
+                      onTap: _toggleFavorite,
+                      child: AnimatedCrossFade(
+                        duration: const Duration(milliseconds: 200),
+                        crossFadeState: _isFavorited
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        // The first child (when not favorited)
+                        firstChild: Icon(
+                          Icons.favorite_border,
+                          color: Colors.grey[800],
+                          size: 30,
+                        ),
+                        // The second child (when favorited)
+                        secondChild: Icon(
+                          Icons.favorite,
+                          color: Colors.pink[300], 
+                          size: 30,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -49,10 +88,7 @@ class DonutDetails extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 25),
                   child: Column(
                     children: [
-                      // 5. Use the donut data to display the correct image
-                      Center(
-                        child: Image.asset(donut.imagePath, width: 230, height: 180),
-                      ),
+                      Center(child: Image.asset(widget.donut.imagePath, width: 230, height: 180)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -64,14 +100,8 @@ class DonutDetails extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      // 5. Use donut data for the category
-                      Center(
-                        child: Text(donut.category, style: TextStyle(color: Colors.grey[800], fontSize: 28, fontWeight: FontWeight.bold)),
-                      ),
-                      // 5. Use donut data for the title
-                      Center(
-                        child: Text(donut.title, style: TextStyle(color: Colors.grey[800], fontSize: 20)),
-                      ),
+                      Center(child: Text(widget.donut.category, style: TextStyle(color: Colors.grey[800], fontSize: 28, fontWeight: FontWeight.bold))),
+                      Center(child: Text(widget.donut.title, style: TextStyle(color: Colors.grey[800], fontSize: 20))),
                       const SizedBox(height: 20),
                       Row(
                         children: const [
@@ -88,7 +118,7 @@ class DonutDetails extends StatelessWidget {
                       Dropdownbox(title: 'Ingredients'),
                       const SizedBox(height: 20),
                       Dropdownbox(title: 'Reviews(50)'),
-                       const SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -98,8 +128,7 @@ class DonutDetails extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
                 child: Row(
                   children: [
-                    // 5. Use donut data for the price
-                    Text(donut.price, style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
+                    Text(widget.donut.price, style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {},

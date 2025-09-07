@@ -161,13 +161,19 @@ class _HomePageState extends State<HomePage> {
                               donut.isFavorited = !donut.isFavorited;
                             });
                           },
-                          // --- 3. THIS IS THE NAVIGATION LOGIC ---
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                // Pass the tapped donut object to the details page
-                                builder: (context) => DonutDetails(donut: donut),
+                                builder: (context) => DonutDetails(
+                                  donut: donut,
+                                  onFavoriteChanged: () {
+                                    setState(() {
+                                      // Toggle the favorite status on the original donut object
+                                      donut.isFavorited = !donut.isFavorited;
+                                    });
+                                  },
+                                ),
                               ),
                             );
                           },
