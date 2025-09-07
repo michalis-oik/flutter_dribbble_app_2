@@ -115,7 +115,7 @@ class _DonutDetailsState extends State<DonutDetails> {
               ),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                 child: Row(
                   children: [
                     Text(widget.donut.price, style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
