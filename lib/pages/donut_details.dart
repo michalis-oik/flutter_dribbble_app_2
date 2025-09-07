@@ -19,91 +19,85 @@ class DonutDetails extends StatelessWidget {
           ),
         ),
         child: SafeArea(
+          // This is the main layout Column that holds the three sections
           child: Column(
-            children: [ 
+            children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                child: Column(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: Row(
                   children: [
-                    Row(
-                      children: [
-                        Icon(Icons.arrow_back, color: Colors.grey[800], size: 30),
-                        const Spacer(),
-                        Icon(Icons.favorite_border, color: Colors.grey[800], size: 30),
-                      ],
-                    ),
-                    //const SizedBox(height: 20),
-                    Center(
-                      child: Image.asset('lib/assets/images/donut2.png', width: 250, height: 200),
-                    ),
-                    //const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          '4.5',
-                          style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Icon(Icons.star, color: Colors.amber),
-                        const SizedBox(width: 8),
-                        Text(
-                          '(50 reviews)',
-                          style: TextStyle(
-                            color: Colors.grey[800],
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: Text(
-                        'Cream-Filled',
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Icon(Icons.arrow_back, color: Colors.grey[800], size: 30),
+                    const Spacer(),
+                    Icon(Icons.favorite_border, color: Colors.grey[800], size: 30),
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: SingleChildScrollView(
+                  // We only need horizontal padding here now
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(
+                    children: [
+                      // The content now starts with the image
+                      Center(
+                        child: Image.asset('lib/assets/images/donut2.png', width: 230, height: 180),
                       ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Vanilla-Sprinkle',
-                        style: TextStyle(
-                          color: Colors.grey[800],
-                          fontSize: 20,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('4.5', style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
+                          const SizedBox(width: 8),
+                          const Icon(Icons.star, color: Colors.amber),
+                          const SizedBox(width: 8),
+                          Text('(50 reviews)', style: TextStyle(color: Colors.grey[800], fontSize: 14)),
+                        ],
                       ),
+                      const SizedBox(height: 10), // A little extra space
+                      Center(
+                        child: Text('Cream-Filled', style: TextStyle(color: Colors.grey[800], fontSize: 28, fontWeight: FontWeight.bold)),
+                      ),
+                      Center(
+                        child: Text('Vanilla-Sprinkle', style: TextStyle(color: Colors.grey[800], fontSize: 20)),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: const [
+                          Expanded(child: Caloriesbox(title: 'Calories', value: '300')),
+                          SizedBox(width: 10),
+                          Expanded(child: Caloriesbox(title: 'Fat', value: '25%')),
+                          SizedBox(width: 10),
+                          Expanded(child: Caloriesbox(title: 'Salt', value: '3%')),
+                          SizedBox(width: 10),
+                          Expanded(child: Caloriesbox(title: 'Sugars', value: '16g')),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Dropdownbox(title: 'Ingredients'),
+                      const SizedBox(height: 20),
+                      Dropdownbox(title: 'Reviews(50)'),
+                       const SizedBox(height: 20), // Padding at the end of the scroll
+                    ],
+                  ),
+                ),
+              ),
+
+              Padding(
+                //top 10 bottom 15
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: Row(
+                  children: [
+                    Text('\$3.99', style: TextStyle(color: Colors.grey[800], fontSize: 24, fontWeight: FontWeight.bold)),
+                    const Spacer(),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pink[300],
+                        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      ),
+                      child: const Text('Add to Cart', style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                     ),
-                    const SizedBox(height: 20),
-
-                    Row(
-                      children: const [
-                        Expanded(child: Caloriesbox(title: 'Calories', value: '300')),
-                        SizedBox(width: 10), // Explicit spacing
-                        Expanded(child: Caloriesbox(title: 'Fat', value: '25%')),
-                        SizedBox(width: 10), // Explicit spacing
-                        Expanded(child: Caloriesbox(title: 'Salt', value: '3%')),
-                        SizedBox(width: 10), // Explicit spacing
-                        Expanded(child: Caloriesbox(title: 'Sugars', value: '16g')),
-                      ],
-                    ),
-
-                    const SizedBox(height: 20),
-                    
-                    // Ingredients box
-                    Dropdownbox(title: 'Ingredients'),
-
-                    const SizedBox(height: 20),
-
-                    // Reviews box
-                    Dropdownbox(title: 'Reviews(50 reviews)')
-
                   ],
                 ),
               ),
