@@ -28,34 +28,33 @@ class DonutCard extends StatefulWidget {
 
 class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMixin {
   double _scale = 1.0;
+  late Color _cardColor; 
+
+  // State for the "add to cart" icon animation
   late AnimationController _cartController;
   late Animation<double> _scaleAnimation;
   late Animation<Color?> _colorAnimation;
 
+  static final Color _defaultColor = Colors.purple[100]!;
+  static final Color _tappedColor = Colors.pink[200]!;
+
   @override
   void initState() {
     super.initState();
+    // Initialize the card color to its default state
+    _cardColor = _defaultColor;
+
     _cartController = AnimationController(
       duration: const Duration(milliseconds: 400),
       vsync: this,
     );
     
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.5).animate(
-      CurvedAnimation(
-        parent: _cartController,
-        curve: Curves.elasticOut,
-      ),
+      CurvedAnimation(parent: _cartController, curve: Curves.elasticOut),
     );
     
-    _colorAnimation = ColorTween(
-      begin: Colors.pink[300],
-      end: Colors.green,
-    ).animate(
-      CurvedAnimation(
-        parent: _cartController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    _colorAnimation = ColorTween(begin: Colors.pink[300], end: Colors.green)
+        .animate(CurvedAnimation(parent: _cartController, curve: Curves.easeInOut));
   }
 
   @override
@@ -64,8 +63,26 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
     super.dispose();
   }
 
-  void _onTapDown(_) => setState(() => _scale = 1.1);
-  void _onTapUp(_) => setState(() => _scale = 1.0);
+  void _onTapDown(_) {
+    setState(() {
+      _scale = 1.1;
+      _cardColor = _tappedColor; // Change to tapped color
+    });
+  }
+
+  void _onTapUp(_) {
+    setState(() {
+      _scale = 1.0;
+      _cardColor = _defaultColor; // Change back to default color
+    });
+  }
+
+  void _onTapCancel() {
+     setState(() {
+      _scale = 1.0;
+      _cardColor = _defaultColor; // Also reset on cancel
+    });
+  }
 
   void _toggleFavorite() {
     widget.onFavoritePressed();
@@ -76,7 +93,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
       _cartController.reverse();
     });
     widget.onAddToCartPressed();
-    print('Add to cart button pressed for ${widget.title}');
   }
 
   @override
@@ -85,15 +101,17 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
       onTap: widget.onTap,
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
-      onTapCancel: () => setState(() => _scale = 1.0),
+      onTapCancel: _onTapCancel,
       child: AnimatedScale(
         scale: _scale,
         duration: const Duration(milliseconds: 150),
         curve: Curves.easeOut,
-        child: Container(
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOut, // Add a curve
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.purple[100],
+            color: _cardColor, 
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
@@ -150,8 +168,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                   ),
                 ),
               ),
-
-              // Bottom left - Favorite
               Positioned(
                 left: 15,
                 bottom: 15,
@@ -168,8 +184,6 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
                   ),
                 ),
               ),
-
-              // Bottom right - Add to cart
               Positioned(
                 right: 15,
                 bottom: 15,
