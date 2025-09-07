@@ -36,7 +36,7 @@ class _DonutCardState extends State<DonutCard> with SingleTickerProviderStateMix
   late Animation<Color?> _colorAnimation;
 
   static final Color _defaultColor = Colors.purple[100]!;
-  static final Color _tappedColor = Colors.pink[200]!;
+  static final Color _tappedColor = Colors.pink[100]!;
 
   @override
   void initState() {

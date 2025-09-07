@@ -140,6 +140,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -169,10 +170,10 @@ class _HomePageState extends State<HomePage> {
                                   donut: donut,
                                   onFavoriteChanged: () {
                                     setState(() {
-                                      // Toggle the favorite status on the original donut object
                                       donut.isFavorited = !donut.isFavorited;
                                     });
                                   },
+                                  onAddToCartPressed: _addToCart,
                                 ),
                               ),
                             );
